@@ -15,7 +15,7 @@ const recipeSchema = new Schema(
     body: {
       type: String,
       required: [true, "Recipe body is required"],
-      minLength: [20, "Recipe body must be at least 20 characters long"],
+      minLength: [10, "Recipe body must be at least 10 characters long"],
     },
     image: {
       type: String,

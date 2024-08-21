@@ -2,19 +2,14 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const dbConnect = require("./src/db/index.js");
 const dotenv = require("dotenv");
-const mongoose = require("mongoose");
 
 dotenv.config();
-mongoose
-  .connect(process.env.LINK_CONNECT_DB)
-  .then(() => {
-    console.log("Connected to the database");
-  })
-  .catch(error => console.log(error));
+dbConnect();
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var indexRouter = require("./src/routes/index");
+var usersRouter = require("./src/routes/users");
 
 var app = express();
 
