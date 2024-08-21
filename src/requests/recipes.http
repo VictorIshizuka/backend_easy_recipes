@@ -1,0 +1,34 @@
+### GET ALL RECIPES
+http://localhost:3000/api/recipes
+
+### GET ONE RECIPE
+http://localhost:3000/api/recipes/66c5b44b65527f7758edc3bb
+
+### POST ONE RECIPE
+POST http://localhost:3000/api/recipes
+Content-Type: application/json
+
+{
+  "name": "test2",
+  "description": "test2",
+  "body": "test max length text2",
+  "category":"66c5b44b65527f7758edc3b8",
+  "difficulty": "medium"
+
+}
+
+### PUT ONE RECIPE
+PUT http://localhost:3000/api/recipes/66c5c176fe4110e034d927a6
+Content-Type: application/json
+
+{
+  "name": "test2 UPDATED",
+  "description": "test2 UPDATED",
+  "body": "test max length text2 UPDATED",
+  "category":"66c5b44b65527f7758edc3b8",
+  "difficulty": "medium"
+
+}
+
+### DELETE ONE RECIPE
+DELETE http://localhost:3000/api/recipes/66c5c66e27f018df7d6ef8a2
