@@ -6,11 +6,13 @@ var logger = require("morgan");
 const dbConnect = require("./src/db/index.js");
 
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 dotenv.config();
 dbConnect();
 
-var recipesRouter = require("./src/routes/recipes.js");
+const recipesRouter = require("./src/routes/recipes.js");
+const categoriesRouter = require("./src/routes/categories.js");
 
 var app = express();
 
@@ -19,7 +21,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
 app.use("/api/recipes", recipesRouter);
+app.use("/api/categories", categoriesRouter);
 
 module.exports = app;

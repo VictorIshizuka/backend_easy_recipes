@@ -7,7 +7,7 @@ const recipeSchema = new Schema(
       type: String,
       required: [true, "Recipe name is required"],
     },
-    slug: { type: String, required: true },
+    slug: { type: String, unique: true, required: true },
     description: {
       type: String,
       required: [true, "Recipe decription is required"],
@@ -19,7 +19,7 @@ const recipeSchema = new Schema(
     },
     image: {
       type: String,
-      default: "noimage.jpg",
+      default: "no_image.jpg",
     },
     category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
     difficulty: {
