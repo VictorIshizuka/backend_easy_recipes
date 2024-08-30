@@ -6,9 +6,21 @@ const Recipe = require("../models/recipe");
 
 /* GET /api/recipes  */
 router.get("/", async function (req, res, next) {
-  try {
-    const recipes = await Recipe.find({});
+  const category = req.query.category;
+  const difficulty = req.query.difficulty;
+  const searchTerm = req.query.searchTerm
+    ? { name: { $regex: req.query.searchTerm, $options: "i" } }
+    : {};
 
+  try {
+    let query = Recipe.find(searchTerm);
+    if (category) {
+      query = query.where("category", category);
+    }
+    if (difficulty) {
+      query = query.where("difficulty").in(difficulty.split(","));
+    }
+    const recipes = await query.exec();
     res.status(200).json(recipes);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -91,7 +103,6 @@ const storage = multer.diskStorage({
 
 function fileFilter(req, file, cb) {
   if (file.mimetype === "image/jpg" || file.mimetype === "image/png") {
-    console.log(file);
     cb(null, true);
   } else {
     cb(new Error("Images only!"), false);
