@@ -3,6 +3,7 @@ var router = express.Router();
 const multer = require("multer");
 
 const Recipe = require("../models/recipe");
+const loggedIn = require("../middleware/auth");
 
 /* GET /api/recipes  */
 router.get("/", async function (req, res, next) {
@@ -41,7 +42,7 @@ router.get("/:id", async function (req, res, next) {
 });
 
 /* POST /api/recipes */
-router.post("/", async function (req, res, next) {
+router.post("/", loggedIn, async function (req, res, next) {
   try {
     req.body.name = req.body.name.trim();
     req.body.slug = req.body.name.trim().replace(/ /g, "-").toLowerCase();
@@ -53,7 +54,7 @@ router.post("/", async function (req, res, next) {
 });
 
 /* PUT /api/recipes/:id */
-router.put("/:id", async function (req, res, next) {
+router.put("/:id", loggedIn, async function (req, res, next) {
   try {
     const id = req.params.id;
     const foundRecipe = await Recipe.findById(id);
@@ -73,7 +74,7 @@ router.put("/:id", async function (req, res, next) {
 });
 
 /* DELETE /api/recipes/:id */
-router.delete("/:id", async function (req, res, next) {
+router.delete("/:id", loggedIn, async function (req, res, next) {
   try {
     const foundRecipe = await Recipe.findById(req.params.id);
     if (!foundRecipe) {
@@ -113,7 +114,7 @@ const upload = multer({ storage, fileFilter });
 
 const uploadSingle = upload.single("image");
 
-router.post("/upload", function (req, res, next) {
+router.post("/upload", loggedIn, function (req, res, next) {
   uploadSingle(req, res, function (err) {
     if (err) {
       return res.status(400).json({ message: err.message });

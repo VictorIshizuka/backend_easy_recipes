@@ -2,7 +2,7 @@
 http://localhost:3000/api/recipes
 
 ### GET ONE RECIPE
-http://localhost:3000/api/recipes/66c5b44b65527f7758edc3bb
+http://localhost:3000/api/recipes/66cf26b374738946fd37199d
 
 ### POST ONE RECIPE
 POST http://localhost:3000/api/recipes

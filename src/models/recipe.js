@@ -10,7 +10,7 @@ const recipeSchema = new Schema(
     slug: { type: String, unique: true, required: true },
     description: {
       type: String,
-      required: [true, "Recipe decription is required"],
+      required: [true, "Recipe description is required"],
     },
     body: {
       type: String,

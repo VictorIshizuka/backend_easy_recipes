@@ -13,6 +13,7 @@ dbConnect();
 
 const recipesRouter = require("./src/routes/recipes.js");
 const categoriesRouter = require("./src/routes/categories.js");
+const usersRouter = require("./src/routes/users.js");
 
 var app = express();
 
@@ -21,9 +22,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 
 app.use("/api/recipes", recipesRouter);
 app.use("/api/categories", categoriesRouter);
+app.use("/api/users", usersRouter);
 
 module.exports = app;
